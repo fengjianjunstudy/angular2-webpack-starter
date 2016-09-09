@@ -16,28 +16,22 @@ import { AppState } from './app.service';
     './app.style.css'
   ],
   template: `
-    <nav>
+    <nav class="container">
       <span>
-        <a [routerLink]=" ['./'] ">
-          Index
+        <a [routerLink]=" ['./user'] ">
+          用户管理
         </a>
       </span>
       |
       <span>
-        <a [routerLink]=" ['./home'] ">
-          Home
+        <a [routerLink]=" ['./group'] ">
+          用户组管理
         </a>
       </span>
       |
       <span>
-        <a [routerLink]=" ['./detail'] ">
-          Detail
-        </a>
-      </span>
-      |
-      <span>
-        <a [routerLink]=" ['./about'] ">
-          About
+        <a [routerLink]=" ['./auth'] ">
+          权限管理
         </a>
       </span>
     </nav>
@@ -46,16 +40,6 @@ import { AppState } from './app.service';
       <router-outlet></router-outlet>
     </main>
 
-    <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
-
-    <footer>
-      <span>WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a></span>
-      <div>
-        <a [href]="url">
-          <img [src]="angularclassLogo" width="25%">
-        </a>
-      </div>
-    </footer>
   `
 })
 export class App {

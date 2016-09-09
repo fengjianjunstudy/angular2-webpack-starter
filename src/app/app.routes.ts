@@ -1,17 +1,14 @@
 import { Routes, RouterModule } from '@angular/router';
-import { Home } from './home';
-import { About } from './about';
-import { NoContent } from './no-content';
+import { AuthManage } from './auth-manage';
+import { GroupManage } from './group-manage';
+import { UserManage } from './user-manage';
 
 import { DataResolver } from './app.resolver';
 
 
 export const ROUTES: Routes = [
-  { path: '',      component: Home },
-  { path: 'home',  component: Home },
-  { path: 'about', component: About },
-  {
-    path: 'detail', loadChildren: () => System.import('./+detail')
-  },
-  { path: '**',    component: NoContent },
+  { path: '',      component: UserManage },
+  { path: 'user',  component: UserManage },
+  { path: 'group', component: GroupManage },
+  { path: 'auth', component: AuthManage },
 ];

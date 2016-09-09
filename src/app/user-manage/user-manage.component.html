@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>user</h1>
+  <ul>
+    <li *ngFor="let user of users" class="clearfix">
+      <span class=" col-lg-1">名字:{{user['user_name']}}</span>
+      <span class="col-lg-2">部门:{{user.section}}</span>
+      <span class="col-lg-3">Email:{{user.email}}</span>
+      <span class="col-lg-2">职位:{{user.position}}</span>
+      <span class="col-lg-2">电话:{{user.tel}}</span>
+    </li>
+  </ul>
+</div>
