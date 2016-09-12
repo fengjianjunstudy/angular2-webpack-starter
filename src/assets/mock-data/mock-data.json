@@ -7,7 +7,7 @@
     "position":"FE",
     "tel":13436810590,
     "auth":0,
-    "groups":[{"id":"g_1","group_name":"g1"},{"id":"g_2","group_name":"g2"}]
+    "groups":["g_1","g_2","g_5"]
   },
   {
     "id":"u_2",
@@ -16,8 +16,8 @@
     "email":"nzf@126.com",
     "position":"FE",
     "tel":13436810590,
-    "auth":0,
-    "groups":["g_1","g_2"]
+    "auth":1,
+    "groups":["g_1","g_6"]
   },
   {
     "id":"u_3",
@@ -26,7 +26,7 @@
     "email":"ylx@126.com",
     "position":"FE",
     "tel":13436810590,
-    "auth":0,
-    "groups":["g_1","g_2"]
+    "auth":1,
+    "groups":["g_3","g_4","g_6"]
   }
 ]

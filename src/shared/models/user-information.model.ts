@@ -25,7 +25,7 @@ export class User implements UserInfo {
   position:string;
   tel:number;
   auth:ROLE;
-  groups:string[];
+  groups:string[] = [];
   constructor(user) {
     this.id = user.id;
     this['user_name'] = user['user_name'];
@@ -35,5 +35,16 @@ export class User implements UserInfo {
     this.position = user.position;
     this.groups = user.groups;
     this.auth = user.auth;
+  }
+  deleteGroup(gId:string) {
+    let index = this.groups.indexOf(gId);
+    if(index>-1) {
+      //let g = this.groups.splice(index,1).slice();
+      //console.log(g === this.groups)
+      this.groups = ["g_5","g_6"]
+    }
+  }
+  clone(u:User) {
+    return new User(u);
   }
 }

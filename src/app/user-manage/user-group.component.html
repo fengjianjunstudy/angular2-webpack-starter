@@ -1,0 +1,17 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>用户组</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="groups && user">
+    <tr *ngFor="let group of groups">
+      <td>{{group.groupName}}</td>
+      <td>
+        <span *ngIf="user.auth === 0" (click)="deleteGroup(group.id)">删除</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

@@ -1,0 +1,11 @@
+<div class="user_right col-lg-9">
+  <div class="right_top" *ngIf="user">
+    <div><label>姓名：</label>{{user['user_name']}}</div>
+    <div><label>部门：</label>{{user.section}}</div>
+    <div><label>邮箱：</label>{{user.email}}</div>
+    <div><label>职位：</label>{{user.position}}</div>
+    <div><label>电话：</label>{{user.tel}}</div>
+    <div><label>权限：</label>{{user.auth | permissions}}</div>
+  </div>
+  <user-group [groups]="groups" [user]="user" (deleteGroupEvent) = "deleteGroup($event)"></user-group>
+</div>

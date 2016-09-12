@@ -10,6 +10,10 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
  */
 import { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
+
+//our shared
+import { PermissionsPipe } from '../shared/pipes/permissions.pipe';
+
 // App is our top level component
 import { App } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
@@ -17,7 +21,9 @@ import { AppState, InteralStateType } from './app.service';
 import { AuthManage } from './auth-manage/auth-manage.component';
 import { GroupManage } from './group-manage/group-manage.component';
 import { UserManage } from './user-manage/user-manage.component';
-
+import { UserLeft } from './user-manage/user-left.component';
+import { UserRight } from './user-manage/user-right.component';
+import { UserGroup } from './user-manage/user-group.component';
 //// Imports for loading & configuring the in-memory web api
 //import { InMemoryWebApiModule } from 'angular2-in-memory-web-api';
 //import { InMemoryDataService }  from './in-memory-data.service';
@@ -42,7 +48,11 @@ type StoreType = {
     App,
     AuthManage,
     GroupManage,
-    UserManage
+    UserManage,
+    UserLeft,
+    UserRight,
+    PermissionsPipe,
+    UserGroup
   ],
   imports: [ // import Angular's modules
     BrowserModule,
