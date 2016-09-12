@@ -16,28 +16,36 @@ const USER_URL = 'http://localhost:3000/assets/mock-data/mock-data.json';
 
 @Injectable()
 export class UserManageService {
-  rawUserData = new BehaviorSubject<UserInfo>(null);
+  rawUserData = new BehaviorSubject<User[]>(null);
   userData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   constructor(private http:Http) {
     this.rawUserData.subscribe((data) => {
       if(data) {
         let users:User[] = [];
-        data.forEach((d) => {
+        for(let d of data) {
           users.push(new User(d));
-        })
+        }
         this.userData.next(users);
       }
     })
   }
   getUsersFromServer() {
     return this.http.get(USER_URL).map((res:Response) => {
-      return JSON.parse(res._body);
-    });
+      return res.json();
+    })
+      .catch(this.handleError);
   }
   getUsers() {
-    console.log(this.getUsersFromServer());
     this.getUsersFromServer().subscribe((data) => {
       this.rawUserData.next(data);
     })
+  }
+  private handleError(error: Response) {
+    // in a real world app, we may send the error to some remote logging infrastructure
+    // instead of just logging it to the console
+    if(!error.json) {
+      console.error(error);
+    }
+    return Observable.throw(error.json().error || 'Server error');
   }
 }

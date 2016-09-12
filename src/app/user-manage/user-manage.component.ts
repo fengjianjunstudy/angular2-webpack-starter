@@ -18,7 +18,6 @@ export class UserManage implements OnInit {
     this.userService.userData.subscribe((users) => {
       if(users) {
         this.users = users;
-        console.log(this.users);
       }
     })
   }

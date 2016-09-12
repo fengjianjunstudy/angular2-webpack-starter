@@ -17,7 +17,7 @@
     "position":"FE",
     "tel":13436810590,
     "auth":0,
-    "groups":[{"id":"g_1","group_name":"g1"},{"id":"g_2","group_name":"g2"}]
+    "groups":["g_1","g_2"]
   },
   {
     "id":"u_3",
@@ -27,6 +27,6 @@
     "position":"FE",
     "tel":13436810590,
     "auth":0,
-    "groups":[{"id":"g_1","group_name":"g1"},{"id":"g_2","group_name":"g2"}]
+    "groups":["g_1","g_2"]
   }
 ]

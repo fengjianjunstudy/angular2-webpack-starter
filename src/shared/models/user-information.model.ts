@@ -1,7 +1,6 @@
 /**
  * Created by fengjj on 2016/9/9.
  */
-import { BaseGroup } from './group-information.model';
 export const enum ROLE{
   admin,
   user
@@ -16,7 +15,7 @@ export interface UserInfo extends BaseUser{
   position:string;
   tel:number;
   auth:ROLE;
-  groups:BaseGroup[];
+  groups:string[];
 }
 export class User implements UserInfo {
   id:string;
@@ -26,7 +25,7 @@ export class User implements UserInfo {
   position:string;
   tel:number;
   auth:ROLE;
-  groups:BaseGroup[];
+  groups:string[];
   constructor(user) {
     this.id = user.id;
     this['user_name'] = user['user_name'];
