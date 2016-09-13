@@ -23,17 +23,19 @@ export class UserManageService {
   rawUserData = new BehaviorSubject<User[]>(null);
   rawGroupData = new BehaviorSubject<GroupInfo[]>(null);
   userData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  groupData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+   groupData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  currentUser:BehaviorSubject<any> = new BehaviorSubject<any>(null);
   constructor(private http:Http) {
     this.rawUserData.subscribe((data) => {
       if(data) {
         let users:User[] = [];
-        for(let d of data) {
+        for (let d of data) {
           users.push(new User(d));
         }
         this.userData.next(users);
+        this.currentUser.next(users[0]);
       }
-    });
+    })
     this.rawGroupData.subscribe((data:GroupInfo[]) => {
       if(data) {
         let gs:Group[] = [];
@@ -43,6 +45,19 @@ export class UserManageService {
         this.groupData.next(gs);
       }
     })
+  }
+  deleteGroup(uId:string,gId) {
+    let curUser = this.currentUser.getValue();
+    if(curUser.id === uId) {
+      let index = curUser.groups.indexOf(gId);
+      if(index>-1) {
+        curUser.groups.splice(index,1);
+        this.currentUser.next(curUser.clone(curUser));
+      }
+    }
+  }
+  deleteUser() {
+
   }
   getUsersFromServer() {
     return this.http.get(USER_URL).map((res:Response) => {

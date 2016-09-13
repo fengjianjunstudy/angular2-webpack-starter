@@ -16,6 +16,8 @@ export interface UserInfo extends BaseUser{
   tel:number;
   auth:ROLE;
   groups:string[];
+  hasId(id:string):boolean;
+  clone(u:User):User;
 }
 export class User implements UserInfo {
   id:string;
@@ -36,13 +38,8 @@ export class User implements UserInfo {
     this.groups = user.groups;
     this.auth = user.auth;
   }
-  deleteGroup(gId:string) {
-    let index = this.groups.indexOf(gId);
-    if(index>-1) {
-      //let g = this.groups.splice(index,1).slice();
-      //console.log(g === this.groups)
-      this.groups = ["g_5","g_6"]
-    }
+  hasId(id:string) {
+    return this.id === id;
   }
   clone(u:User) {
     return new User(u);

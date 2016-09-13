@@ -21,12 +21,9 @@ export class UserRight implements OnChanges {
     })
   }
   ngOnChanges(changes:SimpleChanges) {
-    if(changes['user'].currentValue && changes['user'].currentValue.groups && changes['user'].currentValue.groups.length>0) {
-      console.log(changes['user'].currentValue.groups);
+    if(changes['user'].currentValue && changes['user'].currentValue.groups) {
+      //当user有值且groups数组存在时去获取group的具体信息
       this.userService.getGroups(changes['user'].currentValue.groups);
     }
-  }
-  deleteGroup(gId:string) {
-    this.user.deleteGroup(gId);
   }
 }

@@ -5,6 +5,7 @@ import { Component ,Input  , Output , EventEmitter  } from '@angular/core';
 
 import { Group } from '../../shared/models/group-information.model';
 import { User } from '../../shared/models/user-information.model'
+import { UserManageService } from '../../shared/providers/user-manage.service';
 @Component({
   moduleId: module.id,
   selector: 'user-group',
@@ -15,7 +16,11 @@ export class UserGroup  {
   @Input() groups:Group[];
   @Input() user:User;
   @Output() deleteGroupEvent:EventEmitter<string> = new EventEmitter();
+  constructor(private userService:UserManageService ){
+
+  }
   deleteGroup(gId:string) {
-    this.deleteGroupEvent.emit(gId);
+    this.userService.deleteGroup(this.user.id,gId);
+    //this.deleteGroupEvent.emit(gId);
   }
 }
