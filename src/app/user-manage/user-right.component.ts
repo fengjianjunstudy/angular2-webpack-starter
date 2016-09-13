@@ -14,6 +14,7 @@ import {Group} from "../../shared/models/group-information.model";
 })
 export class UserRight implements OnChanges {
   @Input() user:User;
+  @Input() loginUser:User;
   groups:Group[] = [];
   constructor(private userService:UserManageService) {
     this.userService.groupData.subscribe((data:Group[]) => {

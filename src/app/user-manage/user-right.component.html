@@ -7,5 +7,6 @@
     <div><label>电话：</label>{{user.tel}}</div>
     <div><label>权限：</label>{{user.auth | permissions}}</div>
   </div>
-  <user-group [groups]="groups" [user]="user" (deleteGroupEvent) = "deleteGroup($event)"></user-group>
+  <user-group [groups]="groups" [loginUser] = "loginUser"  [user]="user"></user-group>
+  <button type="button" class="btn btn-primary btn-small">删除用户</button>
 </div>

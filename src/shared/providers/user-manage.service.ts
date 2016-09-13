@@ -17,7 +17,14 @@ import {Group} from "../models/group-information.model";
 const USER_URL = '/assets/mock-data/mock-data.json';
 const Group_URL = '/assets/mock-data/mock-group-data.json';
 //const USER_URL = 'https://www.baidu.com/';
-
+const LOGIN_USER =  {"id":"u_6",
+  "user_name":"ylx",
+  "section":"前端組",
+  "email":"lwz@126.com",
+  "position":"FE",
+  "tel":13436810590,
+  "auth":0,
+  "groups":["g_3","g_4","g_6"]}
 @Injectable()
 export class UserManageService {
   rawUserData = new BehaviorSubject<User[]>(null);
@@ -46,6 +53,9 @@ export class UserManageService {
       }
     })
   }
+  getLoginUser() {
+    return new User(LOGIN_USER);
+  }
   deleteGroup(uId:string,gId) {
     let curUser = this.currentUser.getValue();
     if(curUser.id === uId) {
@@ -55,6 +65,9 @@ export class UserManageService {
         this.currentUser.next(curUser.clone(curUser));
       }
     }
+  }
+  changeCurrentUser(u:User) {
+    this.currentUser.next(u.clone(u));
   }
   deleteUser() {
 

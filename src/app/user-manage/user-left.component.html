@@ -1,3 +1,6 @@
-<ul class="user_left col-lg-3">
-  <li *ngFor="let user of users" [class.cur] = "user.id === curUser.id" (click)="changeUser(user)">{{user['user_name']}}</li>
-</ul>
+<div class=" col-lg-3">
+  <ul class="user_left">
+    <li *ngFor="let user of users" [class.cur] = "user.id === curUser.id" (click)="changeUser(user)">{{user['user_name']}}</li>
+  </ul>
+  <button *ngIf = "loginUser.auth === 0" type="button" class="btn btn-primary btn-lg btn-block" (click)="onInviteUser()">邀请新用户</button>
+</div>

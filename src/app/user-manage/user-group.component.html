@@ -9,7 +9,7 @@
     <tr *ngFor="let group of groups">
       <td>{{group.groupName}}</td>
       <td>
-        <span *ngIf="user.auth === 0" (click)="deleteGroup(group.id)">删除</span>
+        <span *ngIf="loginUser.auth === 0" (click)="deleteGroup(group.id)">删除</span>
       </td>
     </tr>
   </tbody>

@@ -9,6 +9,7 @@
       <!--<span *ngIf = "user.id === curUser.id"  class="col-lg-2">电话:{{user.tel}}</span>-->
     <!--</li>-->
   <!--</ul>-->
-  <user-left [users] = "users" [curUser] = "curUser" (changeCurUserEvent)="changeCurUser($event)"></user-left>
-  <user-right [user]="curUser"></user-right>
+  <user-left [users] = "users" [curUser] = "curUser" [loginUser] = "loginUser" (inviteUserEvent)="onInviteUser($event)"></user-left>
+  <user-right [user]="curUser" [loginUser] = "loginUser" ></user-right>
+  <invite-new-user *ngIf = "modalFlag" (closeModalEvent)="onCloseModal($event)"></invite-new-user>
 </div>

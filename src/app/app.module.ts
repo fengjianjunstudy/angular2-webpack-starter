@@ -24,6 +24,7 @@ import { UserManage } from './user-manage/user-manage.component';
 import { UserLeft } from './user-manage/user-left.component';
 import { UserRight } from './user-manage/user-right.component';
 import { UserGroup } from './user-manage/user-group.component';
+import { InviteNewUser } from './user-manage/invite-new-user.component';
 //// Imports for loading & configuring the in-memory web api
 //import { InMemoryWebApiModule } from 'angular2-in-memory-web-api';
 //import { InMemoryDataService }  from './in-memory-data.service';
@@ -52,7 +53,8 @@ type StoreType = {
     UserLeft,
     UserRight,
     PermissionsPipe,
-    UserGroup
+    UserGroup,
+    InviteNewUser
   ],
   imports: [ // import Angular's modules
     BrowserModule,

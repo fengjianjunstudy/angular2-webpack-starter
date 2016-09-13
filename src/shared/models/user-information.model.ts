@@ -10,10 +10,10 @@ export interface BaseUser {
   user_name:string;
 }
 export interface UserInfo extends BaseUser{
-  section:string;
+  section?:string;
   email:string;
-  position:string;
-  tel:number;
+  position?:string;
+  tel?:number;
   auth:ROLE;
   groups:string[];
   hasId(id:string):boolean;

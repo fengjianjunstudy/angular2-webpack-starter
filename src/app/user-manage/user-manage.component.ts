@@ -1,4 +1,4 @@
-import { Component ,ViewEncapsulation ,OnInit ,OnChanges ,SimpleChanges } from '@angular/core';
+import { Component ,ViewEncapsulation } from '@angular/core';
 
 import { User } from '../../shared/models/user-information.model'
 import { UserManageService } from '../../shared/providers/user-manage.service';
@@ -11,11 +11,11 @@ import { UserManageService } from '../../shared/providers/user-manage.service';
   styleUrls:['./user-manage.component.css'],
   providers:[UserManageService]
 })
-export class UserManage implements OnChanges {
+export class UserManage {
   users:User[];
-  obj:{[k:string]:number} = {a:1};
-  private initFlag = true;
+  loginUser:User;
   curUser:User;
+  modalFlag = false;
   constructor(private userService:UserManageService) {
     this.userService.getUsers();
     this.userService.userData.subscribe((users) => {
@@ -26,12 +26,12 @@ export class UserManage implements OnChanges {
     this.userService.currentUser.subscribe((user:User) => {
       this.curUser = user;
     })
+    this.loginUser = this.userService.getLoginUser();
   }
-  ngOnChanges(changes:SimpleChanges) {
-    console.log(this.users,"change");
+  onInviteUser():void {
+    this.modalFlag = true;
   }
-  //change current user
-  changeCurUser(u:User) {
-    this.curUser = u;
+  onCloseModal():void {
+    this.modalFlag = false;
   }
 }
