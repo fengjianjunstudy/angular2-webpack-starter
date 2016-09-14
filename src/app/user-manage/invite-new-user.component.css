@@ -1,1 +1,3 @@
 .member_auth{ padding:0 0 0 100px;}
+.ng-valid[required] {border-left: 3px solid #00cc66}
+.ng-invalid:not(form) {border-left:3px solid #c00;}

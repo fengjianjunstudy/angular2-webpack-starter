@@ -16,6 +16,7 @@ import {Group} from "../models/group-information.model";
 
 const USER_URL = '/assets/mock-data/mock-data.json';
 const Group_URL = '/assets/mock-data/mock-group-data.json';
+const USER_ID  = "custom_u_";
 //const USER_URL = 'https://www.baidu.com/';
 const LOGIN_USER =  {"id":"u_6",
   "user_name":"ylx",
@@ -32,6 +33,9 @@ export class UserManageService {
   userData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
    groupData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   currentUser:BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  rawAllGroups:BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  allGroups:BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  private u_count = 0;
   constructor(private http:Http) {
     this.rawUserData.subscribe((data) => {
       if(data) {
@@ -50,6 +54,15 @@ export class UserManageService {
           gs.push(new Group(g));
         }
         this.groupData.next(gs);
+      }
+    })
+    this.rawAllGroups.subscribe((data:GroupInfo[]) => {
+      if(data) {
+        let gs:Group[] = [];
+        for(let g of data) {
+          gs.push(new Group(g));
+        }
+        this.allGroups.next(gs);
       }
     })
   }
@@ -91,6 +104,7 @@ export class UserManageService {
   }
   getGroups(ids:string[]) {
     this.getGroupsFromServer().subscribe((data:GroupInfo[]) => {
+      this.rawAllGroups.next(data);
       let groups:GroupInfo[] = [];
       for(let id of ids) {
         for(let g of data) {
@@ -102,6 +116,28 @@ export class UserManageService {
       this.rawGroupData.next(groups);
     });
   }
+  getAllGroups() {
+    return this.allGroups.getValue();
+  }
+  addNewUser(u:User) {
+    console.log(u);
+    let oldUser = this.userData.getValue();
+    let newUser = u.clone(u);
+    newUser.id = USER_ID+this.u_count++;
+    newUser.auth = Number(newUser.auth);
+    oldUser.push(newUser);
+    this.userData.next(oldUser);
+  }
+  deleteUser() {
+    let oldUser = this.userData.getValue();
+    let curUser = this.currentUser.getValue();
+    let index = this.findUserIndexById(oldUser,curUser);
+    if(index>-1) {
+      oldUser.splice(index,1);
+      this.userData.next(oldUser);
+      this.currentUser.next(oldUser[0]);
+    }
+  }
   private getGroupFromServer(id:string) {
     return this.http.get(Group_URL+'?id='+id).map((res:Response) => {
       console.log(res);
@@ -112,6 +148,17 @@ export class UserManageService {
     this.getGroupFromServer(id).subscribe(data => {
       console.log(data);
     })
+  }
+  private findUserIndexById(us:User[],u:User):number {
+    let index = -1;
+    us.forEach((user,i) => {
+      if(u.id === user.id) {
+        index = i;
+        return ;
+      }
+      console.log(i);
+    })
+    return index;
   }
   private handleError(error: Response) {
     // in a real world app, we may send the error to some remote logging infrastructure

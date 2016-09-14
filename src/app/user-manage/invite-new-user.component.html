@@ -2,52 +2,55 @@
   <div class="modal-backdrop fade in"></div>
   <div class="modal-dialog" style="z-index: 1050">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" (click)="onCloseModal($event)"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">邀请新用户</h4>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" role="form">
-          <div class="form-group">
-            <label for="user_name" class="col-sm-3 control-label">姓名</label>
-            <div class="col-sm-6">
-              <input class="form-control" id="user_name" name="user_name" placeholder="name">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="email" class="col-sm-3 control-label">邮箱</label>
-            <div class="col-sm-6">
-              <input type="email"  class="form-control" name="email" id="email" placeholder="email">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="email" class="col-sm-3 control-label"></label>
-            <div class="col-sm-6">
-              <div class="radio ">
-                <label class="radio-inline">
-                  <input type="radio" name="memberAuth" id="auth_1" value="0"> 管理员
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="memberAuth" id="auth_2" value="1"> 普通成员
-                </label>
+      <form class="form-horizontal" role="form" (ngSubmit)="onSubmit()" #userForm = "ngForm">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" (click)="onCloseModal($event)"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">邀请新用户</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="user_name" class="col-sm-3 control-label">姓名</label>
+              <div class="col-sm-6">
+                <input class="form-control" #userName = "ngModel" required id="user_name" [(ngModel)]="initUser['user_name']" name="user_name">
               </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="email" class="col-sm-3 control-label">选择一个用户组</label>
-            <div class="col-sm-6">
-              <select class="form-control input-small">
-                <option value="g_1">组一</option>
-                <option value="g_2">组二</option>
-              </select>
+            <div [hidden]="userName.valid || userName.pristine"
+                 class="alert alert-danger">
+              Name is required
             </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="onCloseModal($event)">取消</button>
-        <button type="button" class="btn btn-primary">邀请</button>
-      </div>
+            <div class="form-group">
+              <label for="email" class="col-sm-3 control-label">邮箱</label>
+              <div class="col-sm-6">
+                <input type="email"  class="form-control" required name="email" [(ngModel)]="initUser.email" id="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email" class="col-sm-3 control-label"></label>
+              <div class="col-sm-6">
+                <div class="radio ">
+                  <label class="radio-inline">
+                    <input type="radio" name="memberAuth"  [(ngModel)]="initUser.auth" checked id="auth_1" value="0"> 管理员
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="memberAuth" [(ngModel)]="initUser.auth" id="auth_2" value="1"> 普通成员
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email" class="col-sm-3 control-label">选择一个用户组</label>
+              <div class="col-sm-6">
+                <select class="form-control input-small" #group required name="group" [ngModel]="initUser.groups" (ngModelChange)="initUser.groups.push(group.value)" >
+                  <option *ngFor="let g of groups" value="{{g.id}}">{{g.groupName}}</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="onCloseModal($event)">取消</button>
+          <button type="submit" [disabled]="!userForm.form.valid" class="btn btn-primary">邀请</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

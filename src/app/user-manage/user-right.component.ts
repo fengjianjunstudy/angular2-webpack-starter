@@ -27,4 +27,7 @@ export class UserRight implements OnChanges {
       this.userService.getGroups(changes['user'].currentValue.groups);
     }
   }
+  onDeleteUser() {
+    this.userService.deleteUser();
+  }
 }

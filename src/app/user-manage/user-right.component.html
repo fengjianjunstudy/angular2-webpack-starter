@@ -8,5 +8,5 @@
     <div><label>权限：</label>{{user.auth | permissions}}</div>
   </div>
   <user-group [groups]="groups" [loginUser] = "loginUser"  [user]="user"></user-group>
-  <button type="button" class="btn btn-primary btn-small">删除用户</button>
+  <button type="button" class="btn btn-primary btn-small" *ngIf="loginUser.auth === 0" (click) = "onDeleteUser()">删除用户</button>
 </div>
