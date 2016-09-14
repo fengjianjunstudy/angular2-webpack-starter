@@ -15,7 +15,7 @@ export class UserLeft {
   @Input() users:User[];
   @Input() curUser:User;
   @Input() loginUser:User;
-  @Output() inviteUserEvent:EventEmitter = new EventEmitter();
+  @Output() inviteUserEvent:EventEmitter<any> = new EventEmitter(null);
   constructor(private userService:UserManageService) {
 
   }

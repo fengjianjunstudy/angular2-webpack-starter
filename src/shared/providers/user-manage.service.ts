@@ -82,9 +82,7 @@ export class UserManageService {
   changeCurrentUser(u:User) {
     this.currentUser.next(u.clone(u));
   }
-  deleteUser() {
 
-  }
   getUsersFromServer() {
     return this.http.get(USER_URL).map((res:Response) => {
       return res.json();

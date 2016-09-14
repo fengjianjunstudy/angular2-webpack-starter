@@ -21,7 +21,7 @@ export class InviteNewUser implements OnInit {
     "groups":[]
   })
   groups:Group[];
-  @Output() closeModalEvent:EventEmitter = new  EventEmitter();
+  @Output() closeModalEvent:EventEmitter<any> = new  EventEmitter(null);
   constructor(private userService:UserManageService) {}
   ngOnInit() {
     let groups = this.userService.getAllGroups();
